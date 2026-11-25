@@ -70,32 +70,6 @@ The pipeline is built locally and follows the ETL pattern:
 | `weather` | Forecast data | `id` (PK), `city_id` (FK), `forecast_time`, ... |
 | `flights` | Arrivals per airport | `id` (PK), `city_id` (FK), ... |
 
-## Repository Structure
-
-
-gans-etl-pipeline/
-├── README.md
-├── requirements.txt
-├── .gitignore
-├── .env.example          # template for API keys and DB credentials
-├── main.py               # runs the full pipeline
-├── notebooks/
-│   ├── 01_web_scraping.ipynb
-│   ├── 02_weather_api.ipynb
-│   ├── 03_flights_api.ipynb
-│   └── 04_database_load.ipynb
-├── src/
-│   ├── config.py         # loads credentials from environment variables
-│   ├── scraping.py       # Wikipedia scraper
-│   ├── weather.py        # OpenWeather extraction and cleaning
-│   ├── flights.py        # AeroDataBox extraction and cleaning
-│   └── database.py      # connection and loading functions
-├── sql/
-│   └── schema.sql        # CREATE TABLE statements
-└── docs/
-    └── er_diagram.png
-
-
 ## Setup and Usage
 
 **Prerequisites:** Python 3.x, MySQL server running locally, an [OpenWeather](https://openweathermap.org/api) API key, and a [RapidAPI](https://rapidapi.com/) key with access to AeroDataBox.
