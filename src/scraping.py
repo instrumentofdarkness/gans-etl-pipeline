@@ -5,7 +5,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (educational project; contact: your-email@example.com)"}
+HEADERS = {"User-Agent": "Mozilla/5.0 (educational project)"}
 
 
 def clean_population(raw):

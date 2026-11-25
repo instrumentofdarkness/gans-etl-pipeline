@@ -126,7 +126,7 @@ The notebooks document the exploration of each data source. The `src/` modules c
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/<your-username>/gans-etl-pipeline.git
+git clone https://github.com/instrumentofdarkness/gans-etl-pipeline.git
 cd gans-etl-pipeline
 
 # 2. Create and activate a virtual environment
