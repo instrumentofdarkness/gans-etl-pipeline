@@ -30,3 +30,17 @@ CREATE TABLE IF NOT EXISTS weather (
     UNIQUE (city_id, forecast_time),
     FOREIGN KEY (city_id) REFERENCES cities(city_id)
 );
+
+CREATE TABLE IF NOT EXISTS flights (
+    flight_id          INT AUTO_INCREMENT PRIMARY KEY,
+    city_id            INT NOT NULL,
+    flight_number      VARCHAR(20) NOT NULL,
+    origin_airport     VARCHAR(150),
+    origin_iata        VARCHAR(5),
+    airline            VARCHAR(100),
+    scheduled_arrival  DATETIME NOT NULL,   -- local time at the destination airport
+    status             VARCHAR(50),
+    retrieval_date     DATE NOT NULL,
+    UNIQUE (city_id, flight_number, scheduled_arrival),
+    FOREIGN KEY (city_id) REFERENCES cities(city_id)
+);

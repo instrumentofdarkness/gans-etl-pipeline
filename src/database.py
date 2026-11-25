@@ -87,3 +87,33 @@ def load_weather(df, engine):
     """)
     with engine.begin() as conn:
         conn.execute(sql, records)
+
+def load_flights(df, engine):
+    """Insert flights (skips rows that already exist)."""
+    with engine.connect() as conn:
+        ids = pd.read_sql(text("SELECT city_id, city_name FROM cities"), conn)
+
+    merged = df.merge(ids, left_on="city", right_on="city_name")
+    records = [
+        {
+            "city_id": int(r.city_id),
+            "flight_number": r.flight_number,
+            "origin_airport": r.origin_airport,
+            "origin_iata": r.origin_iata,
+            "airline": r.airline,
+            "scheduled_arrival": r.scheduled_arrival.to_pydatetime(),
+            "status": r.status,
+            "retrieval_date": r.retrieval_date,
+        }
+        for r in merged.itertuples()
+    ]
+    sql = text("""
+        INSERT IGNORE INTO flights
+            (city_id, flight_number, origin_airport, origin_iata, airline,
+             scheduled_arrival, status, retrieval_date)
+        VALUES
+            (:city_id, :flight_number, :origin_airport, :origin_iata, :airline,
+             :scheduled_arrival, :status, :retrieval_date)
+    """)
+    with engine.begin() as conn:
+        conn.execute(sql, records)
