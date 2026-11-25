@@ -153,8 +153,8 @@ Credentials are read from environment variables (via `python-dotenv`), and `.env
 
 - **Challenge:** Wikipedia infoboxes can list several population figures (city, urban area, metro area), and the position of the right row is not guaranteed.
   **Solution:** Searched the infobox by its row label instead of a fixed position, and checked the results for all three cities against the real figures.
-- **Challenge:** Coordinates on Wikipedia come in degrees, minutes and seconds, and sometimes without seconds.
-  **Solution:** Wrote a regex-based converter with optional minutes and seconds that returns rounded decimal degrees and handles southern and western hemispheres.
+- **Challenge:** Wikipedia gives coordinates in degrees, minutes and seconds (e.g. `52°31′12″N`), but some pages omit the seconds (e.g. `53°33′N`), so a fixed pattern fails on them.
+  **Solution:** Wrote a regex-based converter in which minutes and seconds are optional, and which returns rounded decimal degrees and handles southern and western hemispheres.
 - **Challenge:** The database connection failed with "Access denied" because the `.env` file still contained placeholder credentials.
   **Solution:** Entered the real MySQL credentials and restarted the notebook kernel, since the variables are only read when the config module is first imported.
 - **Challenge:** Loading weather data failed because the `weather` table did not exist yet.
